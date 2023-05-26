@@ -10,7 +10,7 @@ public class ClientApplication {
 
 	static {
 		System.setProperty("java.security.krb5.conf",
-				Paths.get("Kerberos-config/krb5.conf").normalize().toAbsolutePath().toString());
+				Paths.get(".\\kerberos-config\\krb5.conf").normalize().toAbsolutePath().toString());
 		System.setProperty("sun.security.krb5.debug", "true");
 		//
 		System.setProperty("http.use.global.creds", "false");

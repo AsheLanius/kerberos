@@ -19,6 +19,8 @@ import org.springframework.security.kerberos.web.authentication.SpnegoAuthentica
 import org.springframework.security.kerberos.web.authentication.SpnegoEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import java.nio.file.Paths;
+
 /**
  * @author Scallion
  * @version 1.0
@@ -44,11 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                //.antMatchers("/hello").hasRole("vip")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                //.loginPage("/toLogin").usernameParameter("username").passwordParameter("password").loginProcessingUrl("/toLogin").defaultSuccessUrl("/", true)
                 .and()
                 .logout().permitAll()
                 .and()
@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("user").password(new BCryptPasswordEncoder().encode("1234")).roles("vip")
                 .and()
                 .withUser("server/admin").password(new BCryptPasswordEncoder().encode("1234")).roles("vip")
-                ;
+        ;
     }
 
     @Bean
@@ -78,6 +78,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         SunJaasKerberosClient client = new SunJaasKerberosClient();
         client.setDebug(true);
         provider.setKerberosClient(client);
+        provider.setUserDetailsService(dummyUserDetailsService());
+        return provider;
+    }
+
+    @Bean
+    public KerberosServiceAuthenticationProvider kerberosServiceAuthenticationProvider() {
+        KerberosServiceAuthenticationProvider provider = new KerberosServiceAuthenticationProvider();
+        provider.setTicketValidator(sunJaasKerberosTicketValidator());
         provider.setUserDetailsService(dummyUserDetailsService());
         return provider;
     }
@@ -95,13 +103,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return filter;
     }
 
-    @Bean
-    public KerberosServiceAuthenticationProvider kerberosServiceAuthenticationProvider() {
-        KerberosServiceAuthenticationProvider provider = new KerberosServiceAuthenticationProvider();
-        provider.setTicketValidator(sunJaasKerberosTicketValidator());
-        provider.setUserDetailsService(dummyUserDetailsService());
-        return provider;
-    }
 
     @Bean
     public SunJaasKerberosTicketValidator sunJaasKerberosTicketValidator() {

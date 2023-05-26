@@ -9,10 +9,8 @@ import java.nio.file.Paths;
 public class ServerApplication {
 
     static {
-        System.out.println(Paths.get("Kerberos-config/krb5.conf").normalize().toAbsolutePath().toString());
-
         System.setProperty("java.security.krb5.conf",
-                Paths.get("Kerberos-config/krb5.conf")
+                Paths.get("kerberos-config\\krb5.conf")
                         .normalize().toAbsolutePath().toString());
         System.setProperty("sun.security.krb5.debug", "true");
         System.setProperty("sun.security.spnego.debug", "true");

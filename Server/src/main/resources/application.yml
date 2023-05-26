@@ -1,8 +1,9 @@
 app:
-  service-principal: server/admin
+  service-principal: HTTP/service.com
   #keytab-location: .\\spring-security-sso\\spring-security-sso-kerberos\\krb-test-workdir\\example.keytab
-  #keytab-location: d:\\kerberos\\server.keytab
-  keytab-location: Kerberos-config/server.keytab
+  #keytab-location: d:\\kerberos\\service.keytab
+  keytab-location: .\\kerberos-config\\service.keytab
+  #location: .\\kerberos-config\\service.keytab
 
 server:
   port: 8081

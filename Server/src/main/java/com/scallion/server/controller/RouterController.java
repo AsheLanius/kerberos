@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class RouterController {
-/*    @RequestMapping({"/","/index"})
+    @RequestMapping({"/","/index"})
     public String index(){
         return "index";
     }
@@ -30,5 +30,5 @@ public class RouterController {
     @RequestMapping("function3")
     public String function3(){
         return "function3";
-    }*/
+    }
 }

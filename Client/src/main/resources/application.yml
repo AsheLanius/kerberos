@@ -1,7 +1,7 @@
 app:
-  keytab-location: Kerberos-config/client.keytab
-  access-url: http://localhost:8081/server/hello
-  service-principal: server/admin
+  keytab-location: .\\kerberos-config\\client.keytab
+  access-url: http://service.com:8081/server/hello
+  #service-principal: server/admin
   user-principal: client/admin
 server:
   port: 8082
